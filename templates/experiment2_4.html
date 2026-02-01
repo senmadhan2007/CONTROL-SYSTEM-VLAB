@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Experiment 2.4</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+<body>
+
+{% include 'header.html' %}
+<div class="exp-layout">
+    <div class="exp-left">
+
+        <h2>Experiment 2.4 – Response of Second Order Critically damped System</h2>
+
+        <h3>Reference Program</h3>
+        <pre class="code nocopy">
+s=%s;
+Wn=5;
+E_c=1;
+t=0:0.001:10;
+G_c=syslin('c',Wn^2,s^2+2*E_c*Wn*s+Wn^2);
+C_c=csim('step',t,G_c);
+plot2d(t,C_c)
+title("Response of Second Order Critically damped System")
+xlabel("Time in Sec.")
+ylabel("Response")
+        </pre>
+
+        <h3>Type the Program</h3>
+        <textarea id="code" rows="10"></textarea>
+
+        <button class="primary-btn" onclick="run()">Execute</button>
+        <p id="msg"></p>
+        <div class="back-container">
+            <button class="back-btn" onclick="location.href='/experiment2'">← Back</button>
+        </div>
+
+    </div>
+    <div class="exp-right">
+        <h3>Output</h3>
+        <img id="output">
+    </div>
+
+</div>
+
+<script>
+function run(){
+ let msg=document.getElementById("msg");
+ let out=document.getElementById("output");
+ let d=new FormData();
+ d.append("code",document.getElementById("code").value);
+
+ fetch("/run_exp2_4",{method:"POST",body:d})
+ .then(r=>r.json()).then(r=>{
+  if(r.error){
+    msg.className="error-box";
+    msg.innerHTML=r.error;
+    out.src="";
+  } else {
+    msg.className="success-box";
+    msg.innerHTML="Execution Successful";
+    out.src="/static/output.png?"+Date.now();
+  }
+ });
+}
+</script>
+
+
+</body>
+</html>

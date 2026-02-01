@@ -5,25 +5,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
 {% include 'header.html' %}
-
 <div class="index-container">
-
     <h1 class="index-heading">List of Experiments</h1>
-
     <div class="experiment-list">
-
         <div class="experiment-item" onclick="location.href='/experiment1'">
             <span class="exp-no">Experiment 1</span>
             <span class="exp-title">
-                Step, Ramp and Impulse Response of First Order and Second Order Systems
-            </span>
+                Step, Ramp and Impulse Response of First Order and Second Order Systems</span>
         </div>
-
+        <div class="experiment-item" onclick="location.href='/experiment2'">
+            <span class="exp-no">Experiment 2</span>
+            <span class="exp-title">Identification of Damping in Second Order System</span>
+        </div>
     </div>
-
 </div>
-
 </body>
 </html>

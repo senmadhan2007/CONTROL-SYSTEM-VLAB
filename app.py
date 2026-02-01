@@ -44,6 +44,26 @@ def experiment1_7():
 def experiment1_8():
     return render_template("experiment1_8.html")
 
+@app.route("/experiment2")
+def experiment2():
+    return render_template("experiment2.html")
+
+@app.route("/experiment2_1")
+def experiment2_1():
+    return render_template("experiment2_1.html")
+
+@app.route("/experiment2_2")
+def experiment2_2():
+    return render_template("experiment2_2.html")
+
+@app.route("/experiment2_3")
+def experiment2_3():
+    return render_template("experiment2_3.html")
+
+@app.route("/experiment2_4")
+def experiment2_4():
+    return render_template("experiment2_4.html")
+
 def normalize(code):
     return [
         l.replace(" ", "").replace("\t", "")
@@ -420,7 +440,6 @@ def run_exp1_8():
     K = None
 
     for line in lines:
-        # Match: Sys_2=syslin('c',K/(s^2+7*s+10));
         m = re.match(
             r"Sys_2=syslin\('c',([\d.]+)/\(s\^2\+7\*s\+10\)\);?",
             line
@@ -460,6 +479,187 @@ def run_exp1_8():
     """
 
     subprocess.run(["scilab", "-nw", "-e", scilab], check=True)
+    return jsonify({"success": True})
+
+@app.route("/run_exp2_1", methods=["POST"])
+def run_exp2_1():
+    code = request.form.get("code", "")
+    if not code.strip():
+        return jsonify({"error": "Program cannot be empty."})
+
+    student_norm = normalize(code)
+
+    ref = normalize("""
+s=%s;
+Wn=5;
+E_u=0;
+t=0:0.001:10;
+G_u=syslin('c',Wn^2,s^2+2*E_u*Wn*s+Wn^2);
+C_u=csim('step',t,G_u);
+plot2d(t,C_u)
+title("Response of Second Order Undamped System")
+xlabel("Time in Sec.")
+ylabel("Response")
+""")
+    if student_norm == ref:
+        return jsonify({"error": "Reference program should not be copied exactly."})
+    scilab = f"""
+    try
+        {code}
+        xs2png(0,"static/output.png");
+    catch
+        disp(lasterror());
+        exit(1);
+    end
+    exit;
+    """
+    try:
+        subprocess.run(
+            ["scilab", "-nw", "-e", scilab],
+            check=True,
+            timeout=15
+        )
+    except subprocess.CalledProcessError:
+        return jsonify({"error": "Execution error. Please check your program."})
+    except subprocess.TimeoutExpired:
+        return jsonify({"error": "Execution timed out."})
+
+    return jsonify({"success": True})
+
+@app.route("/run_exp2_2", methods=["POST"])
+def run_exp2_2():
+    code = request.form.get("code", "")
+    if not code.strip():
+        return jsonify({"error": "Program cannot be empty."})
+
+    student_norm = normalize(code)
+
+    ref = normalize("""
+s=%s;
+Wn=5;
+E_und=0.1;
+t=0:0.001:10;
+G_u=syslin('c',Wn^2,s^2+2*E_und*Wn*s+Wn^2);
+C_u=csim('step',t,G_u);
+plot2d(t,C_u)
+title("Response of Second Order Underdamped System")
+xlabel("Time in Sec.")
+ylabel("Response")
+""")
+    if student_norm == ref:
+        return jsonify({"error": "Reference program should not be copied exactly."})
+    scilab = f"""
+    try
+        {code}
+        xs2png(0,"static/output.png");
+    catch
+        disp(lasterror());
+        exit(1);
+    end
+    exit;
+    """
+    try:
+        subprocess.run(
+            ["scilab", "-nw", "-e", scilab],
+            check=True,
+            timeout=15
+        )
+    except subprocess.CalledProcessError:
+        return jsonify({"error": "Execution error. Please check your program."})
+    except subprocess.TimeoutExpired:
+        return jsonify({"error": "Execution timed out."})
+
+    return jsonify({"success": True})
+
+@app.route("/run_exp2_3", methods=["POST"])
+def run_exp2_3():
+    code = request.form.get("code", "")
+    if not code.strip():
+        return jsonify({"error": "Program cannot be empty."})
+
+    student_norm = normalize(code)
+
+    ref = normalize("""
+s=%s;
+Wn=5;
+E_o=5;
+t=0:0.001:10;
+G_o=syslin('c',Wn^2,s^2+2*E_o*Wn*s+Wn^2);
+C_o=csim('step',t,G_o);
+plot2d(t,C_o)
+title("Response of Second Order Overdamped System")
+xlabel("Time in Sec.")
+ylabel("Response")
+""")
+    if student_norm == ref:
+        return jsonify({"error": "Reference program should not be copied exactly."})
+    scilab = f"""
+    try
+        {code}
+        xs2png(0,"static/output.png");
+    catch
+        disp(lasterror());
+        exit(1);
+    end
+    exit;
+    """
+    try:
+        subprocess.run(
+            ["scilab", "-nw", "-e", scilab],
+            check=True,
+            timeout=15
+        )
+    except subprocess.CalledProcessError:
+        return jsonify({"error": "Execution error. Please check your program."})
+    except subprocess.TimeoutExpired:
+        return jsonify({"error": "Execution timed out."})
+
+    return jsonify({"success": True})
+
+@app.route("/run_exp2_4", methods=["POST"])
+def run_exp2_4():
+    code = request.form.get("code", "")
+    if not code.strip():
+        return jsonify({"error": "Program cannot be empty."})
+
+    student_norm = normalize(code)
+
+    ref = normalize("""
+s=%s;
+Wn=5;
+E_c=1;
+t=0:0.001:10;
+G_c=syslin('c',Wn^2,s^2+2*E_c*Wn*s+Wn^2);
+C_c=csim('step',t,G_c);
+plot2d(t,C_c)
+title("Response of Second Order Critically damped System")
+xlabel("Time in Sec.")
+ylabel("Response")
+""")
+
+    if student_norm == ref:
+        return jsonify({"error": "Reference program should not be copied exactly."})
+    scilab = f"""
+    try
+        {code}
+        xs2png(0,"static/output.png");
+    catch
+        disp(lasterror());
+        exit(1);
+    end
+    exit;
+    """
+    try:
+        subprocess.run(
+            ["scilab", "-nw", "-e", scilab],
+            check=True,
+            timeout=15
+        )
+    except subprocess.CalledProcessError:
+        return jsonify({"error": "Execution error. Please check your program."})
+    except subprocess.TimeoutExpired:
+        return jsonify({"error": "Execution timed out."})
+
     return jsonify({"success": True})
 
 if __name__ == "__main__":

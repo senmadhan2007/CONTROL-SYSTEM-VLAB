@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Experiment 1</title>
+<title>Experiment 2</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -22,9 +22,9 @@
         <section id="aim" class="content-section active">
             <h2>Aim</h2>
             <p>
-                To study and analyze the time-domain responses (step, impulse,
-                ramp, and sinusoidal) of first order and second order control
-                systems using simulation.
+To identify and study the damping characteristics of a second order control system 
+by analyzing its time response and determining whether the system is 
+underdamped, critically damped, or overdamped.
             </p>
         </section>
         <section id="apparatus" class="content-section">
@@ -38,18 +38,29 @@
         </section>
         <section id="theory" class="content-section">
             <h2>Theory</h2>
-            <p>
-                Control systems are mathematical models used to regulate the
-                behavior of dynamic systems. The time response of a system
-                indicates how the system reacts to different inputs such as
-                step, impulse, ramp, and sinusoidal signals.
-            </p>
-            <p>
-                First order systems are characterized by a single energy storage
-                element, while second order systems contain two energy storage
-                elements. Studying their responses helps in understanding system
-                stability, speed of response, and steady-state behavior.
-            </p>
+         <p>
+A second order control system is commonly represented by the standard transfer function:
+</p>
+
+<p style="text-align:center; font-weight:600;">
+G(s) = ω<sub>n</sub><sup>2</sup> / (s<sup>2</sup> + 2ζω<sub>n</sub>s + ω<sub>n</sub><sup>2</sup>)
+</p>
+
+<p>
+Here, ω<sub>n</sub> is the natural frequency and ζ (zeta) is the damping ratio of the system.
+The damping ratio determines the nature of the system response.
+</p>
+
+<ul>
+    <li><b>Underdamped (0 &lt; ζ &lt; 1):</b> Oscillatory response with decreasing amplitude.</li>
+    <li><b>Critically damped (ζ = 1):</b> Fastest response without oscillations.</li>
+    <li><b>Overdamped (ζ &gt; 1):</b> Slow response without oscillations.</li>
+</ul>
+
+<p>
+By observing the system response such as overshoot, settling time, and oscillations, 
+the damping condition of the second order system can be identified.
+</p>
         </section>
         <section id="procedure" class="content-section">
             <h2>Procedure</h2>
@@ -64,35 +75,20 @@
         </section>
         <section id="list" class="content-section">
             <h2>List of Experiments</h2>
-
-            <div class="exp-item" onclick="location.href='/experiment1_1'">
-    1.1 Step Response of First Order System
-</div>
-
-<div class="exp-item" onclick="location.href='/experiment1_2'">
-    1.2 Impulse Response of First Order System
-</div>
-<div class="exp-item" onclick="location.href='/experiment1_3'">1.3 Sinusoidal Response of First Order System</div>
-<div class="exp-item" onclick="location.href='/experiment1_4'">1.4 Ramp Response of First Order System</div>
-<div class="exp-item" onclick="location.href='/experiment1_5'">1.5 Step Response of Second Order System</div>
-<div class="exp-item" onclick="location.href='/experiment1_6'">1.6 Impulse Response of Second Order System</div>
-<div class="exp-item" onclick="location.href='/experiment1_7'">1.7 Sinusoidal Response of Second Order System</div>
-<div class="exp-item" onclick="location.href='/experiment1_8'">1.8 Ramp Response of Second Order System</div>
-
+<div class="exp-item" onclick="location.href='/experiment2_1'">2.1 Response of Second Order Undamped System</div>
+<div class="exp-item" onclick="location.href='/experiment2_2'">2.2 Response of Second Order Underdamped System</div>
+<div class="exp-item" onclick="location.href='/experiment2_3'">2.3 Response of Second Order Overdamped System</div>
+<div class="exp-item" onclick="location.href='/experiment2_4'">2.4 Response of Second Order Critically damped System</div>
         </section>
         <section id="result" class="content-section">
             <h2>Result</h2>
             <p>
-                The time-domain responses of first order and second order systems
-                were successfully simulated and analyzed using Scilab.
+                Thus the importance of Damping Coefficient ζ was studied with its various 
+                conditions and for various values for various inputs.
             </p>
-            
         </section>
-
     </main>
-
 </div>
-
 <script>
 function showSection(id){
     document.querySelectorAll('.content-section').forEach(sec=>{
