@@ -1,3 +1,7 @@
+import time
+LAST_EXEC_TIME = 0
+COOLDOWN = 10 
+
 from flask import Flask, render_template, request, jsonify
 import subprocess
 import re
@@ -70,9 +74,24 @@ def normalize(code):
         for l in code.splitlines()
         if l.strip()
     ]
+def check_cooldown():
+    global LAST_EXEC_TIME
+    now = time.time()
+
+    if now - LAST_EXEC_TIME < COOLDOWN:
+        remaining = int(COOLDOWN - (now - LAST_EXEC_TIME))
+        return False, remaining
+
+    LAST_EXEC_TIME = now
+    return True, 0
 
 @app.route("/run_exp1_1", methods=["POST"])
 def run_exp1_1():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
@@ -124,9 +143,15 @@ def run_exp1_1():
 
 @app.route("/run_exp1_2", methods=["POST"])
 def run_exp1_2():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
+
 
     lines = normalize(code)
     normalized = []
@@ -175,6 +200,11 @@ def run_exp1_2():
 
 @app.route("/run_exp1_3", methods=["POST"])
 def run_exp1_3():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
@@ -228,9 +258,15 @@ def run_exp1_3():
 
 @app.route("/run_exp1_4", methods=["POST"])
 def run_exp1_4():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
+
 
     lines = normalize(code)
     normalized = []
@@ -281,9 +317,15 @@ def run_exp1_4():
 
 @app.route("/run_exp1_5", methods=["POST"])
 def run_exp1_5():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
+
 
     lines = normalize(code)
     normalized = []
@@ -330,9 +372,15 @@ def run_exp1_5():
 
 @app.route("/run_exp1_6", methods=["POST"])
 def run_exp1_6():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
+
 
     lines = normalize(code)
     normalized = []
@@ -379,9 +427,15 @@ def run_exp1_6():
 
 @app.route("/run_exp1_7", methods=["POST"])
 def run_exp1_7():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
+
 
     lines = normalize(code)
     normalized = []
@@ -431,9 +485,15 @@ def run_exp1_7():
 
 @app.route("/run_exp1_8", methods=["POST"])
 def run_exp1_8():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
+
 
     lines = normalize(code)
     normalized = []
@@ -483,9 +543,15 @@ def run_exp1_8():
 
 @app.route("/run_exp2_1", methods=["POST"])
 def run_exp2_1():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
+
 
     student_norm = normalize(code)
 
@@ -528,9 +594,15 @@ ylabel("Response")
 
 @app.route("/run_exp2_2", methods=["POST"])
 def run_exp2_2():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
+
 
     student_norm = normalize(code)
 
@@ -573,9 +645,15 @@ ylabel("Response")
 
 @app.route("/run_exp2_3", methods=["POST"])
 def run_exp2_3():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
+
 
     student_norm = normalize(code)
 
@@ -618,9 +696,15 @@ ylabel("Response")
 
 @app.route("/run_exp2_4", methods=["POST"])
 def run_exp2_4():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
+
 
     student_norm = normalize(code)
 
