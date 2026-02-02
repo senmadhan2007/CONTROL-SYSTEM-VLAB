@@ -1,6 +1,6 @@
 import time
 LAST_EXEC_TIME = 0
-COOLDOWN = 10 
+COOLDOWN = 5 
 
 from flask import Flask, render_template, request, jsonify
 import subprocess
@@ -599,7 +599,6 @@ def run_exp2_1():
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
 
-
     student_norm = normalize(code)
 
     ref = normalize("""
@@ -614,18 +613,25 @@ title("Response of Second Order Undamped System")
 xlabel("Time in Sec.")
 ylabel("Response")
 """)
+
     if student_norm == ref:
         return jsonify({"error": "Reference program should not be copied exactly."})
+
+    output_path = "static/output.png"
+    if os.path.exists(output_path):
+        os.remove(output_path)
+
     scilab = f"""
-    try
-        {code}
-        xs2png(0,"static/output.png");
-    catch
-        disp(lasterror());
-        exit(1);
-    end
-    exit;
-    """
+try
+    {code}
+    xs2png(0,"{output_path}");
+catch
+    disp(lasterror());
+    exit(1);
+end
+exit;
+"""
+
     try:
         subprocess.run(
             ["scilab", "-nw", "-e", scilab],
@@ -633,11 +639,14 @@ ylabel("Response")
             timeout=15
         )
     except subprocess.CalledProcessError:
-        return jsonify({"error": "Execution error. Please check your program."})
+        return jsonify({"error": "Scilab execution error. Check your syntax."})
     except subprocess.TimeoutExpired:
         return jsonify({"error": "Execution timed out."})
 
-    return jsonify({"success": True})
+    if not os.path.exists(output_path):
+        return jsonify({"error": "No output generated. Please check your program."})
+
+    return jsonify({"success": True, "image": "/static/output.png"})
 
 @app.route("/run_exp2_2", methods=["POST"])
 def run_exp2_2():
@@ -649,7 +658,6 @@ def run_exp2_2():
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
-
 
     student_norm = normalize(code)
 
@@ -665,18 +673,25 @@ title("Response of Second Order Underdamped System")
 xlabel("Time in Sec.")
 ylabel("Response")
 """)
+
     if student_norm == ref:
         return jsonify({"error": "Reference program should not be copied exactly."})
+
+    output_path = "static/output.png"
+    if os.path.exists(output_path):
+        os.remove(output_path)
+
     scilab = f"""
-    try
-        {code}
-        xs2png(0,"static/output.png");
-    catch
-        disp(lasterror());
-        exit(1);
-    end
-    exit;
-    """
+try
+    {code}
+    xs2png(0,"{output_path}");
+catch
+    disp(lasterror());
+    exit(1);
+end
+exit;
+"""
+
     try:
         subprocess.run(
             ["scilab", "-nw", "-e", scilab],
@@ -684,11 +699,15 @@ ylabel("Response")
             timeout=15
         )
     except subprocess.CalledProcessError:
-        return jsonify({"error": "Execution error. Please check your program."})
+        return jsonify({"error": "Scilab execution error. Check your syntax."})
     except subprocess.TimeoutExpired:
         return jsonify({"error": "Execution timed out."})
 
-    return jsonify({"success": True})
+    if not os.path.exists(output_path):
+        return jsonify({"error": "No output generated. Please check your program."})
+
+    return jsonify({"success": True, "image": "/static/output.png"})
+
 
 @app.route("/run_exp2_3", methods=["POST"])
 def run_exp2_3():
@@ -700,7 +719,6 @@ def run_exp2_3():
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
-
 
     student_norm = normalize(code)
 
@@ -716,18 +734,24 @@ title("Response of Second Order Overdamped System")
 xlabel("Time in Sec.")
 ylabel("Response")
 """)
+
     if student_norm == ref:
         return jsonify({"error": "Reference program should not be copied exactly."})
+
+    output_path = "static/output.png"
+    if os.path.exists(output_path):
+        os.remove(output_path)
+
     scilab = f"""
-    try
-        {code}
-        xs2png(0,"static/output.png");
-    catch
-        disp(lasterror());
-        exit(1);
-    end
-    exit;
-    """
+try
+    {code}
+    xs2png(0,"{output_path}");
+catch
+    disp(lasterror());
+    exit(1);
+end
+exit;
+"""
     try:
         subprocess.run(
             ["scilab", "-nw", "-e", scilab],
@@ -735,11 +759,14 @@ ylabel("Response")
             timeout=15
         )
     except subprocess.CalledProcessError:
-        return jsonify({"error": "Execution error. Please check your program."})
+        return jsonify({"error": "Scilab execution error. Check your syntax."})
     except subprocess.TimeoutExpired:
         return jsonify({"error": "Execution timed out."})
 
-    return jsonify({"success": True})
+    if not os.path.exists(output_path):
+        return jsonify({"error": "No output generated. Please check your program."})
+
+    return jsonify({"success": True, "image": "/static/output.png"})
 
 @app.route("/run_exp2_4", methods=["POST"])
 def run_exp2_4():
@@ -751,7 +778,6 @@ def run_exp2_4():
     code = request.form.get("code", "")
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
-
 
     student_norm = normalize(code)
 
@@ -770,16 +796,21 @@ ylabel("Response")
 
     if student_norm == ref:
         return jsonify({"error": "Reference program should not be copied exactly."})
+
+    output_path = "static/output.png"
+    if os.path.exists(output_path):
+        os.remove(output_path)
+
     scilab = f"""
-    try
-        {code}
-        xs2png(0,"static/output.png");
-    catch
-        disp(lasterror());
-        exit(1);
-    end
-    exit;
-    """
+try
+    {code}
+    xs2png(0,"{output_path}");
+catch
+    disp(lasterror());
+    exit(1);
+end
+exit;
+"""
     try:
         subprocess.run(
             ["scilab", "-nw", "-e", scilab],
@@ -787,11 +818,15 @@ ylabel("Response")
             timeout=15
         )
     except subprocess.CalledProcessError:
-        return jsonify({"error": "Execution error. Please check your program."})
+        return jsonify({"error": "Scilab execution error. Check your syntax."})
     except subprocess.TimeoutExpired:
         return jsonify({"error": "Execution timed out."})
 
-    return jsonify({"success": True})
+    if not os.path.exists(output_path):
+        return jsonify({"error": "No output generated. Please check your program."})
+
+    return jsonify({"success": True, "image": "/static/output.png"})
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)
