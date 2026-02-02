@@ -123,22 +123,17 @@ ylabel("Response")
 
     scilab = f"""
 try
-    mode(0);
-    clf();
-    scf(0);
-    set("figure_style","new");
     {code}
-    xs2png(0,"/home/ubuntu/CONTROL-SYSTEM-VLAB/static/output.png");
+    xs2png(0,"{output_path}");
 catch
     disp(lasterror());
     exit(1);
 end
 exit;
-
 """
     try:
         subprocess.run(
-            ["scilab-cli", "-e", scilab],
+            ["scilab", "-nw", "-e", scilab],
             check=True,
             timeout=15
         )
@@ -191,23 +186,18 @@ ylabel("Response")
 
     scilab = f"""
 try
-    mode(0);
-    clf();
-    scf(0);
-    set("figure_style","new");
     {code}
-    xs2png(0,"/home/ubuntu/CONTROL-SYSTEM-VLAB/static/output.png");
+    xs2png(0,"{output_path}");
 catch
     disp(lasterror());
     exit(1);
 end
 exit;
-
 """
 
     try:
         subprocess.run(
-            ["scilab-cli", "-e", scilab],
+            ["scilab", "-nw", "-e", scilab],
             check=True,
             timeout=15
         )
@@ -259,22 +249,17 @@ ylabel("Response")
 
     scilab = f"""
 try
-    mode(0);
-    clf();
-    scf(0);
-    set("figure_style","new");
     {code}
-    xs2png(0,"/home/ubuntu/CONTROL-SYSTEM-VLAB/static/output.png");
+    xs2png(0,"{output_path}");
 catch
     disp(lasterror());
     exit(1);
 end
 exit;
-
 """
     try:
         subprocess.run(
-            ["scilab-cli", "-e", scilab],
+            ["scilab", "-nw", "-e", scilab],
             check=True,
             timeout=15
         )
@@ -328,22 +313,17 @@ ylabel("Response")
 
     scilab = f"""
 try
-    mode(0);
-    clf();
-    scf(0);
-    set("figure_style","new");
     {code}
-    xs2png(0,"/home/ubuntu/CONTROL-SYSTEM-VLAB/static/output.png");
+    xs2png(0,"{output_path}");
 catch
     disp(lasterror());
     exit(1);
 end
 exit;
-
 """
     try:
         subprocess.run(
-            ["scilab-cli", "-e", scilab],
+            ["scilab", "-nw", "-e", scilab],
             check=True,
             timeout=15
         )
@@ -395,23 +375,18 @@ ylabel("Response")
 
     scilab = f"""
 try
-    mode(0);
-    clf();
-    scf(0);
-    set("figure_style","new");
     {code}
-    xs2png(0,"/home/ubuntu/CONTROL-SYSTEM-VLAB/static/output.png");
+    xs2png(0,"{output_path}");
 catch
     disp(lasterror());
     exit(1);
 end
 exit;
-
 """
 
     try:
         subprocess.run(
-            ["scilab-cli", "-e", scilab],
+            ["scilab", "-nw", "-e", scilab],
             check=True,
             timeout=15
         )
@@ -462,22 +437,17 @@ ylabel("Response")
 
     scilab = f"""
 try
-    mode(0);
-    clf();
-    scf(0);
-    set("figure_style","new");
     {code}
-    xs2png(0,"/home/ubuntu/CONTROL-SYSTEM-VLAB/static/output.png");
+    xs2png(0,"{output_path}");
 catch
     disp(lasterror());
     exit(1);
 end
 exit;
-
 """
     try:
         subprocess.run(
-            ["scilab-cli", "-e", scilab],
+            ["scilab", "-nw", "-e", scilab],
             check=True,
             timeout=15
         )
@@ -530,22 +500,17 @@ ylabel("Response")
 
     scilab = f"""
 try
-    mode(0);
-    clf();
-    scf(0);
-    set("figure_style","new");
     {code}
-    xs2png(0,"/home/ubuntu/CONTROL-SYSTEM-VLAB/static/output.png");
+    xs2png(0,"{output_path}");
 catch
     disp(lasterror());
     exit(1);
 end
 exit;
-
 """
     try:
         subprocess.run(
-            ["scilab-cli", "-e", scilab],
+            ["scilab", "-nw", "-e", scilab],
             check=True,
             timeout=15
         )
@@ -597,22 +562,17 @@ ylabel("Response")
 
     scilab = f"""
 try
-    mode(0);
-    clf();
-    scf(0);
-    set("figure_style","new");
     {code}
-    xs2png(0,"/home/ubuntu/CONTROL-SYSTEM-VLAB/static/output.png");
+    xs2png(0,"{output_path}");
 catch
     disp(lasterror());
     exit(1);
 end
 exit;
-
 """
     try:
         subprocess.run(
-            ["scilab-cli", "-e", scilab],
+            ["scilab", "-nw", "-e", scilab],
             check=True,
             timeout=15
         )
@@ -663,23 +623,18 @@ ylabel("Response")
 
     scilab = f"""
 try
-    mode(0);
-    clf();
-    scf(0);
-    set("figure_style","new");
     {code}
-    xs2png(0,"/home/ubuntu/CONTROL-SYSTEM-VLAB/static/output.png");
+    xs2png(0,"{output_path}");
 catch
     disp(lasterror());
     exit(1);
 end
 exit;
-
 """
 
     try:
         subprocess.run(
-            ["scilab-cli", "-e", scilab],
+            ["scilab", "-nw", "-e", scilab],
             check=True,
             timeout=15
         )
@@ -728,21 +683,18 @@ ylabel("Response")
 
     scilab = f"""
 try
-    mode(0);
-    clf();
-    scf(0);
-    set("figure_style","new");
     {code}
-    xs2png(0,"/home/ubuntu/CONTROL-SYSTEM-VLAB/static/output.png");
+    xs2png(0,"{output_path}");
 catch
     disp(lasterror());
     exit(1);
 end
 exit;
 """
+
     try:
         subprocess.run(
-            ["scilab-cli", "-e", scilab],
+            ["scilab", "-nw", "-e", scilab],
             check=True,
             timeout=15
         )
@@ -792,22 +744,17 @@ ylabel("Response")
 
     scilab = f"""
 try
-    mode(0);
-    clf();
-    scf(0);
-    set("figure_style","new");
     {code}
-    xs2png(0,"/home/ubuntu/CONTROL-SYSTEM-VLAB/static/output.png");
+    xs2png(0,"{output_path}");
 catch
     disp(lasterror());
     exit(1);
 end
 exit;
-
 """
     try:
         subprocess.run(
-            ["scilab-cli", "-e", scilab],
+            ["scilab", "-nw", "-e", scilab],
             check=True,
             timeout=15
         )
@@ -856,22 +803,17 @@ ylabel("Response")
 
     scilab = f"""
 try
-    mode(0);
-    clf();
-    scf(0);
-    set("figure_style","new");
     {code}
-    xs2png(0,"/home/ubuntu/CONTROL-SYSTEM-VLAB/static/output.png");
+    xs2png(0,"{output_path}");
 catch
     disp(lasterror());
     exit(1);
 end
 exit;
-
 """
     try:
         subprocess.run(
-            ["scilab-cli", "-e", scilab],
+            ["scilab", "-nw", "-e", scilab],
             check=True,
             timeout=15
         )
