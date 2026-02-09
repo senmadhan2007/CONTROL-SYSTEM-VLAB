@@ -20,6 +20,7 @@ Sys_1 = syslin('c', 1/(7*s + 1));
 Ramp = t;
 Ramp_G_s = csim(Ramp, t, Sys_1);
 plot2d(t, Ramp_G_s);
+xgrid();
 title("Ramp Response of First Order System");
 xlabel("Time in Sec.");
 ylabel("Response");

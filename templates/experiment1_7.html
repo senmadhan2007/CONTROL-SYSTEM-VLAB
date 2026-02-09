@@ -21,6 +21,7 @@ Sys_2 = syslin('c', 1/(s^2 + 7*s + 10));
 u = sin(t);
 Sin_G_s = csim(u, t, Sys_2);
 plot2d(t, Sin_G_s);
+xgrid();
 title("Sinusoidal Response of Second Order System");
 xlabel("Time in Sec.");
 ylabel("Response");

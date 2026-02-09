@@ -21,6 +21,7 @@ Sys_2 = syslin('c', 1/(s^2 + 7*s + 10));
 Ramp = t;
 Ramp_G_s = csim(Ramp, t, Sys_2);
 plot2d(t, Ramp_G_s);
+xgrid();
 title("Ramp Response of Second Order System");
 xlabel("Time in Sec.");
 ylabel("Response");

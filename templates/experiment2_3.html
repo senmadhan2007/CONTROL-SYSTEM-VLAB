@@ -20,7 +20,8 @@ E_o=5;
 t=0:0.001:10;
 G_o=syslin('c',Wn^2,s^2+2*E_o*Wn*s+Wn^2);
 C_o=csim('step',t,G_o);
-plot2d(t,C_o)
+plot2d(t,C_o);
+xgrid();
 title("Response of Second Order Overdamped System")
 xlabel("Time in Sec.")
 ylabel("Response")

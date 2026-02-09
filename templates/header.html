@@ -7,48 +7,10 @@
         <h1>Department of Electronics and Instrumentation Engineering</h1>
         <h1>Control System Virtual Laboratory</h1>
     </div>
+
     <div class="logo-right">
         <img src="{{ url_for('static',filename='vlab_logo.jpg') }}">
     </div>
 </header>
-<div class="black-bar"></div>
 
-<script>
-document.addEventListener("contextmenu", function (e) {
-    e.preventDefault();
-});
-document.addEventListener("keydown", function (e) {
-    if (e.keyCode === 123) {
-        e.preventDefault();
-        return false;
-    }
-    if (e.ctrlKey && e.shiftKey && 
-        (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
-        e.preventDefault();
-        return false;
-    }
-    if (e.ctrlKey && e.keyCode === 85) {
-        e.preventDefault();
-        return false;
-    }
-    if (e.ctrlKey && e.keyCode === 83) {
-        e.preventDefault();
-        return false;
-    }
-});
-setInterval(function () {
-    if (
-        window.outerWidth - window.innerWidth > 160 ||
-        window.outerHeight - window.innerHeight > 160
-    ) {
-        document.body.innerHTML = `
-            <h2 style="
-                text-align:center;
-                margin-top:20%;
-                font-family:Georgia,serif;
-                color:#b91c1c;">
-                Developer Tools are Disabled
-            </h2>`;
-    }
-}, 1000);
-</script>
+<div class="black-bar"></div>

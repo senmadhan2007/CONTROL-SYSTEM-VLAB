@@ -20,6 +20,7 @@ t = 0:0.05:30;
 Sys_2 = syslin('c', 1/(s^2 + 7*s + 10));
 Impulse_G_s = csim('impulse', t, Sys_2);
 plot2d(t, Impulse_G_s);
+xgrid();
 title("Impulse Response of Second Order System");
 xlabel("Time in Sec.");
 ylabel("Response");

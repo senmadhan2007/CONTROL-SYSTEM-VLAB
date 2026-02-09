@@ -20,7 +20,8 @@ E_und=0.1;
 t=0:0.001:10;
 G_u=syslin('c',Wn^2,s^2+2*E_und*Wn*s+Wn^2);
 C_u=csim('step',t,G_u);
-plot2d(t,C_u)
+plot2d(t,C_u);
+xgrid();
 title("Response of Second Order Underdamped System")
 xlabel("Time in Sec.")
 ylabel("Response")
