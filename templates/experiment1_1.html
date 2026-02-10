@@ -20,9 +20,9 @@ Sys_1=syslin('c',1/(7*s+1));
 Step_G_s=csim('step',t,Sys_1);
 plot2d(t,Step_G_s);
 xgrid();
-title("Step Response of First Order System");
-xlabel("Time in Sec.");
-ylabel("Response");
+title("Step Response of First Order System","fontsize",1.5);
+xlabel("Time in Sec.","fontsize",1);
+ylabel("Response","fontsize",1);
         </pre>
 
         <h3>Type the Program</h3>
@@ -41,7 +41,6 @@ ylabel("Response");
     </div>
 
 </div>
-
 <script>
 function run(){
  let msg=document.getElementById("msg");

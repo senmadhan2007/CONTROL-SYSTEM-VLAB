@@ -21,9 +21,9 @@ Sys_2 = syslin('c', 1/(s^2 + 7*s + 10));
 Impulse_G_s = csim('impulse', t, Sys_2);
 plot2d(t, Impulse_G_s);
 xgrid();
-title("Impulse Response of Second Order System");
-xlabel("Time in Sec.");
-ylabel("Response");
+title("Impulse Response of Second Order System","fontsize",1.5);
+xlabel("Time in Sec.","fontsize",1);
+ylabel("Response","fontsize",1);
         </pre>
 
         <h3>Type the Program</h3>

@@ -1,30 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Experiment 1.2</title>
+<title>Experiment 3</title>
 <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
 </head>
 <body>
 
 {% include 'header.html' %}
-
 <div class="exp-layout">
-
     <div class="exp-left">
 
-        <h2>Experiment 1.2 – Impulse Response of First Order System</h2>
+        <h2>Experiment 3 – Time Domain Analysis for Second Order Systems</h2>
 
         <h3>Reference Program</h3>
+        
         <pre class="code nocopy">
-s = poly(0,'s');
-t = 0:0.05:30;
-Sys_1 = syslin('c', 1/(7*s + 1));
-Impulse_G_s = csim('impulse', t, Sys_1);
-plot2d(t, Impulse_G_s);
-xgrid();
-title("Impulse Response of First Order System","fontsize",1.5);
-xlabel("Time in Sec.","fontsize",1);
-ylabel("Response","fontsize",1);
+
         </pre>
 
         <h3>Type the Program</h3>
@@ -32,9 +23,8 @@ ylabel("Response","fontsize",1);
 
         <button class="primary-btn" onclick="run()">Execute</button>
         <p id="msg"></p>
-
         <div class="back-container">
-            <button class="back-btn" onclick="location.href='/experiment1'">← Back</button>
+            <button class="back-btn" onclick="location.href='/experiment3'">← Back</button>
         </div>
 
     </div>
@@ -42,6 +32,7 @@ ylabel("Response","fontsize",1);
         <h3>Output</h3>
         <img id="output">
     </div>
+
 </div>
 
 <script>
@@ -51,7 +42,7 @@ function run(){
  let d=new FormData();
  d.append("code",document.getElementById("code").value);
 
- fetch("/run_exp1_2",{method:"POST",body:d})
+ fetch("/run_exp3_1",{method:"POST",body:d})
  .then(r=>r.json()).then(r=>{
   if(r.error){
     msg.className="error-box";

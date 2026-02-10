@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Experiment 3</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<div class="layout">
+    <aside class="sidebar exp-sidebar">
+        <button class="nav-btn active" onclick="showSection('aim')">Aim</button>
+        <button class="nav-btn" onclick="showSection('apparatus')">Apparatus</button>
+        <button class="nav-btn" onclick="showSection('theory')">Theory</button>
+        <button class="nav-btn" onclick="showSection('procedure')">Procedure</button>
+        <button class="nav-btn" onclick="location.href='/experiment3_1'">Simulation</button>
+        <button class="nav-btn" onclick="showSection('result')">Result</button>
+        <button class="nav-btn" onclick="location.href='/'">← Back</button>
+    </aside>
+
+    <main class="content-area">
+        <section id="aim" class="content-section active">
+            <h2>Aim</h2>
+            <p>
+                To study and analyze the time-domain response of a second order
+                control system and determine its performance parameters such as
+                peak time, overshoot, rise time, delay time, and settling time
+                using Scilab simulation.
+            </p>
+        </section>
+        <section id="apparatus" class="content-section">
+            <h2>Apparatus Required</h2>
+            <ul>
+                <li>Computer / Laptop</li>
+                <li>Scilab Software</li>
+                <li>Internet Browser</li>
+                <li>Virtual Control System Laboratory</li>
+            </ul>
+        </section>
+        <section id="theory" class="content-section">
+            <h2>Theory</h2>
+            <p>
+                A second order control system is represented by a differential
+                equation containing two energy storage elements. Its standard
+                transfer function is given by:
+            </p>
+            <p>
+                G(s) = ω<sub>n</sub><sup>2</sup> / (s<sup>2</sup> + 2ζω<sub>n</sub>s + ω<sub>n</sub><sup>2</sup>)
+            </p>
+            <p>
+                The time-domain response of such a system provides insight into
+                its dynamic behavior, stability, speed of response, and damping
+                characteristics.
+            </p>
+        </section>
+        <section id="procedure" class="content-section">
+            <h2>Procedure</h2>
+            <ol>
+                <li>Select Experiment 3 from the experiment list.</li>
+                <li>Observe the reference Scilab program provided.</li>
+                <li>Type the program in the editor exactly.</li>
+                <li>Modify only the system parameters if instructed.</li>
+                <li>Click <b>Execute</b> to run the simulation.</li>
+                <li>Observe the response and note the results.</li>
+            </ol>
+        </section>
+
+        <section id="result" class="content-section">
+            <h2>Result</h2>
+            <p>
+                The time-domain response of the second order system was
+                successfully simulated using Scilab. Performance parameters
+                such as peak time, rise time, settling time, and overshoot were
+                determined and analyzed.
+            </p>
+        </section>
+
+    </main>
+</div>
+
+<script>
+function showSection(id){
+    document.querySelectorAll('.content-section').forEach(sec=>{
+        sec.classList.remove('active');
+    });
+    document.querySelectorAll('.nav-btn').forEach(btn=>{
+        btn.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>

@@ -11,6 +11,24 @@
     <div class="logo-right">
         <img src="{{ url_for('static',filename='vlab_logo.jpg') }}">
     </div>
+    <script>
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+</script>
+<script>
+document.addEventListener('keydown', function(e) {
+    if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
+        (e.ctrlKey && e.key === 'U')
+    ) {
+        e.preventDefault();
+        return false;
+    }
+});
+</script>
+
 </header>
 
 <div class="black-bar"></div>
