@@ -310,6 +310,48 @@ G_c=syslin('c',Wn^2,s^2+2*E_c*Wn*s+Wn^2);
 C_c=csim('step',t,G_c);
 plot2d(t,C_c)
 """)
+@app.route("/run_exp3_1", methods=["POST"])
+def run_exp3_1():
+    return common_runner(request.form.get("code",""), """
+s=%s; 
+t=0:0.0001:5;
+
+Sys=syslin('c',25,s^2+4*s+25); 
+G_s=csim('step',t,Sys);
+plot2d(t,G_s,rect=[0,0,5,1.6]);
+xgrid();
+title("Response of Second Order System","fontsize",1.5);
+xlabel("Time in Sec.","fontsize",1);
+ylabel("Response","fontsize",1);
+
+D_Pol=Sys.den; 
+z=coeff(D_Pol);
+
+Wn=sqrt(z(1,1)); 
+zeta=z(1,2)/(2*Wn); 
+Wd=Wn*sqrt(1-zeta^2);
+
+Tp=%pi/Wd;
+Mp=100*exp((-%pi*zeta)/sqrt(1-zeta^2));
+Td=(1+0.7*zeta)/Wn; 
+a=atan(sqrt(1-zeta^2)/zeta); 
+Tr=(%pi-a)/Wd; 
+Tset=4/(zeta*Wn);
+
+Peak_Time="Peak Time = "+string(Tp)+" secs";
+Peak_Overshoot="Peak Overshoot = "+string(Mp)+" percent";
+Delay_Time="Delay Time = "+string(Td)+" secs";
+Rise_Time="Rise Time = "+string(Tr)+" secs";
+Settling_Time="Settling Time = "+string(Tset)+" secs";
+
+xstring(3.2,1.4,"Time Domain Specifications");
+xstring(3.2,1.25,Peak_Time);
+xstring(3.2,1.1,Peak_Overshoot);
+xstring(3.2,0.95,Delay_Time);
+xstring(3.2,0.8,Rise_Time);
+xstring(3.2,0.65,Settling_Time);
+
+""")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)
