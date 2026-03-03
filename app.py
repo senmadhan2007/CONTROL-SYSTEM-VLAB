@@ -77,6 +77,14 @@ def experiment3():
 def experiment3_1():
     return render_template("experiment3_1.html")
 
+@app.route("/experiment4")
+def experiment4():
+    return render_template("experiment4.html")
+
+@app.route("/experiment4_1")
+def experiment4_1():
+    return render_template("experiment4_1.html")
+
 def normalize(code):
     return [
         l.replace(" ", "").replace("\t", "")
@@ -285,7 +293,6 @@ C_u=csim('step',t,G_u);
 plot2d(t,C_u)
 """)
 
-
 @app.route("/run_exp2_3", methods=["POST"])
 def run_exp2_3():
     return common_runner(request.form.get("code",""), """
@@ -297,7 +304,6 @@ G_o=syslin('c',Wn^2,s^2+2*E_o*Wn*s+Wn^2);
 C_o=csim('step',t,G_o);
 plot2d(t,C_o)
 """)
-
 
 @app.route("/run_exp2_4", methods=["POST"])
 def run_exp2_4():
@@ -352,6 +358,13 @@ xstring(3.2,0.8,Rise_Time);
 xstring(3.2,0.65,Settling_Time);
 
 """)
-
+@app.route("/run_exp4_1", methods=["POST"])
+def run_exp4_1():
+    return common_runner(request.form.get("code",""), """
+s = poly(0, 's');
+t = 0:0.05:30;
+Sys = syslin('c', (s^2 + 5*s + 3) / (s^3 + 3*s^2 + 6*s + 1));
+plzr(Sys);
+""")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)

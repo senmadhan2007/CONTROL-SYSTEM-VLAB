@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Experiment 4</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<div class="layout">
+    <aside class="sidebar exp-sidebar">
+        <button class="nav-btn active" onclick="showSection('aim')">Aim</button>
+        <button class="nav-btn" onclick="showSection('apparatus')">Apparatus</button>
+        <button class="nav-btn" onclick="showSection('theory')">Theory</button>
+        <button class="nav-btn" onclick="showSection('procedure')">Procedure</button>
+        <button class="nav-btn" onclick="location.href='/experiment4_1'">Simulation</button>
+        <button class="nav-btn" onclick="showSection('result')">Result</button>
+        <button class="nav-btn" onclick="location.href='/'">← Back</button>
+    </aside>
+
+    <main class="content-area">
+
+    <section id="aim" class="content-section active">
+        <h2>Aim</h2>
+        <p>
+            To study and analyze the stability of linear time-invariant systems 
+            using pole-zero plots and determine the system stability based on the 
+            location of poles in the s-plane using Scilab.
+        </p>
+    </section>
+
+    <section id="apparatus" class="content-section">
+        <h2>Apparatus Required</h2>
+        <ul>
+            <li>Computer / Laptop</li>
+            <li>Scilab Software</li>
+            <li>Internet Browser</li>
+            <li>Virtual Control System Laboratory</li>
+        </ul>
+    </section>
+
+    <section id="theory" class="content-section">
+        <h2>Theory</h2>
+        <p>
+            The stability of a linear time-invariant (LTI) system can be determined 
+            from the location of its poles in the complex s-plane. The transfer 
+            function of a system is given by:
+        </p>
+        <p>
+            G(s) = N(s) / D(s)
+        </p>
+        <p>
+            where N(s) represents the numerator polynomial (zeros) and 
+            D(s) represents the denominator polynomial (poles).
+        </p>
+        <p>
+            The system stability conditions are:
+        </p>
+        <ul>
+            <li>If all poles lie in the left half of the s-plane (negative real part), the system is <b>Stable</b>.</li>
+            <li>If any pole lies in the right half of the s-plane (positive real part), the system is <b>Unstable</b>.</li>
+            <li>If poles lie on the imaginary axis (real part zero), the system is <b>Marginally Stable</b>.</li>
+        </ul>
+        <p>
+            The pole-zero plot provides a graphical representation of poles and zeros 
+            and helps in analyzing system stability and dynamic characteristics.
+        </p>
+    </section>
+
+    <section id="procedure" class="content-section">
+        <h2>Procedure</h2>
+        <ol>
+            <li>Select the experiment “Stability Analysis using Pole-Zero Plot”.</li>
+            <li>Observe the given system transfer function.</li>
+            <li>Enter the transfer function in Scilab using <code>syslin()</code>.</li>
+            <li>Generate the pole-zero plot using <code>plzr()</code>.</li>
+            <li>Observe the pole locations in the s-plane.</li>
+            <li>Determine whether the system is stable, unstable, or marginally stable.</li>
+        </ol>
+    </section>
+
+    <section id="result" class="content-section">
+        <h2>Result</h2>
+        <p>
+            The pole-zero plot of the given linear system was successfully obtained 
+            using Scilab. Based on the location of poles in the s-plane, the stability 
+            of the system was analyzed and verified.
+        </p>
+    </section>
+
+</main>
+</div>
+
+<script>
+function showSection(id){
+    document.querySelectorAll('.content-section').forEach(sec=>{
+        sec.classList.remove('active');
+    });
+    document.querySelectorAll('.nav-btn').forEach(btn=>{
+        btn.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
