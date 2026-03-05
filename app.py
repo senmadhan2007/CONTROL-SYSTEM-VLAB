@@ -138,9 +138,6 @@ def common_runner(code, ref):
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
 
-    if normalize(code) == normalize(ref):
-        return jsonify({"error": "Reference program should not be copied exactly."})
-
     output_path = "static/output.png"
 
     try:
@@ -324,7 +321,7 @@ t=0:0.0001:5;
 
 Sys=syslin('c',25,s^2+4*s+25); 
 G_s=csim('step',t,Sys);
-plot2d(t,G_s,rect=[0,0,5,1.6]);
+plot2d(t,G_s);
 xgrid();
 title("Response of Second Order System","fontsize",1.5);
 xlabel("Time in Sec.","fontsize",1);
@@ -332,7 +329,6 @@ ylabel("Response","fontsize",1);
 
 D_Pol=Sys.den; 
 z=coeff(D_Pol);
-
 Wn=sqrt(z(1,1)); 
 zeta=z(1,2)/(2*Wn); 
 Wd=Wn*sqrt(1-zeta^2);
