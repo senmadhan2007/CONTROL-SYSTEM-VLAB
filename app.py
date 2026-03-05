@@ -165,7 +165,7 @@ Step_G_s=csim('step',t,Sys_1);
 plot2d(t,Step_G_s)
 title("Step Response of First Order System")
 xlabel("Time in Sec.")
-ylabel("Response")
+ylabel("Output")
 """)
 
 
@@ -181,7 +181,7 @@ Impulse_G_s=csim('impulse',t,Sys_1);
 plot2d(t,Impulse_G_s)
 title("Impulse Response of First Order System")
 xlabel("Time in Sec.")
-ylabel("Response")
+ylabel("Output")
 """)
 
 
@@ -198,7 +198,7 @@ Sin_G_s=csim(u,t,Sys_1);
 plot2d(t,Sin_G_s)
 title("Sinusoidal Response of First Order System")
 xlabel("Time in Sec.")
-ylabel("Response")
+ylabel("Output")
 """)
 
 
@@ -215,7 +215,7 @@ Ramp_G_s=csim(Ramp,t,Sys_1);
 plot2d(t,Ramp_G_s)
 title("Ramp Response of First Order System")
 xlabel("Time in Sec.")
-ylabel("Response")
+ylabel("Output")
 """)
 
 
@@ -325,7 +325,7 @@ plot2d(t,G_s);
 xgrid();
 title("Response of Second Order System","fontsize",1.5);
 xlabel("Time in Sec.","fontsize",1);
-ylabel("Response","fontsize",1);
+ylabel("Output","fontsize",1);
 
 D_Pol=Sys.den; 
 z=coeff(D_Pol);
