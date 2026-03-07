@@ -280,7 +280,7 @@ textarea{
     width:70%;
 }
 .exp-right{
-    width:30%;
+    width:50%;
     background:#f8fafc;
     padding:15px;
     border-radius:10px;
@@ -288,7 +288,7 @@ textarea{
 }
 .exp-right h3{
     margin-top:0;
-    color:#1e3a8a;
+    color:#0f0786;
 }
 #output{
     max-width:100%;
@@ -317,7 +317,7 @@ textarea{
     border:2px dashed #dc2626;
     box-shadow:inset 0 0 14px rgba(220,38,38,0.18);
     text-align:justify;
-    width:850px;
+    width:710px;
     padding:15px;
     margin:8px;
     box-sizing:border-box;
