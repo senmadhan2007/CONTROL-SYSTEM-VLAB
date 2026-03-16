@@ -394,21 +394,16 @@ plzr(Sys);
 """)
 @app.route("/run_exp5_1", methods=["POST"])
 def run_exp5_1():
-
     allowed, wait = check_cooldown()
     if not allowed:
         return jsonify({"error": f"System busy. Please wait {wait} seconds."})
-
     code = request.form.get("code","")
-
     if not code.strip():
         return jsonify({"error": "Program cannot be empty."})
-
     try:
         output = run_scilab_console(code)
     except subprocess.TimeoutExpired:
         return jsonify({"error": "Execution timed out."})
-
     return jsonify({"output": output})
 
 if __name__ == "__main__":
