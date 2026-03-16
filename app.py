@@ -85,6 +85,14 @@ def experiment4():
 def experiment4_1():
     return render_template("experiment4_1.html")
 
+@app.route("/experiment5")
+def experiment5():
+    return render_template("experiment5.html")
+
+@app.route("/experiment5_1")
+def experiment5_1():
+    return render_template("experiment5_1.html")
+
 def normalize(code):
     return [
         l.replace(" ", "").replace("\t", "")
@@ -152,6 +160,28 @@ def common_runner(code, ref):
 
     return jsonify({"success": True, "image": "/static/output.png"})
 
+def run_scilab_console(code):
+
+    scilab = f"""
+try
+{code}
+catch
+    disp(lasterror());
+    exit(1);
+end
+exit;
+"""
+
+    result = subprocess.run(
+        ["scilab","-nw","-nb","-quit","-e",scilab],
+        capture_output=True,
+        text=True,
+        timeout=15
+    )
+    output = result.stdout
+    output = output.replace('"','')
+
+    return output
 
 @app.route("/run_exp1_1", methods=["POST"])
 def run_exp1_1():
@@ -362,5 +392,24 @@ t = 0:0.05:30;
 Sys = syslin('c', (s^2 + 5*s + 3) / (s^3 + 3*s^2 + 6*s + 1));
 plzr(Sys);
 """)
+@app.route("/run_exp5_1", methods=["POST"])
+def run_exp5_1():
+
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+
+    code = request.form.get("code","")
+
+    if not code.strip():
+        return jsonify({"error": "Program cannot be empty."})
+
+    try:
+        output = run_scilab_console(code)
+    except subprocess.TimeoutExpired:
+        return jsonify({"error": "Execution timed out."})
+
+    return jsonify({"output": output})
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)
