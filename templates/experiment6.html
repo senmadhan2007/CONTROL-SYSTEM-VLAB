@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Experiment 6</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<div class="layout">
+    <aside class="sidebar exp-sidebar">
+        <button class="nav-btn active" onclick="showSection('aim')">Aim</button>
+        <button class="nav-btn" onclick="showSection('apparatus')">Apparatus</button>
+        <button class="nav-btn" onclick="showSection('theory')">Theory</button>
+        <button class="nav-btn" onclick="showSection('procedure')">Procedure</button>
+        <button class="nav-btn" onclick="location.href='/experiment6_1'">Simulation</button>
+        <button class="nav-btn" onclick="showSection('result')">Result</button>
+        <button class="nav-btn" onclick="location.href='/'">← Back</button>
+    </aside>
+
+    <main class="content-area">
+
+    <section id="aim" class="content-section active">
+        <h2>Aim</h2>
+        <p>
+            To study and analyze the stability of a linear time-invariant system 
+        using the Root Locus technique and determine system behavior for 
+        different values of gain K using Scilab.
+        </p>
+    </section>
+
+    <section id="apparatus" class="content-section">
+        <h2>Apparatus Required</h2>
+        <ul>
+            <li>Computer / Laptop</li>
+            <li>Scilab Software</li>
+            <li>Internet Browser</li>
+            <li>Virtual Control System Laboratory</li>
+        </ul>
+    </section>
+
+    <section id="theory" class="content-section">
+    <h2>Theory</h2>
+    <p>
+        Root Locus is a graphical method used to study how the roots of the 
+        characteristic equation of a control system change with variation 
+        in system gain (K).
+    </p>
+    <p>
+        The characteristic equation is given by:
+    </p>
+    <p>
+        1 + G(s)H(s) = 0
+    </p>
+    <p>
+        where G(s)H(s) is the open-loop transfer function.
+    </p>
+    <p>
+        The root locus shows the movement of system poles in the s-plane 
+        as K varies from 0 to infinity.
+    </p>
+    <p>
+        Stability conditions:
+    </p>
+    <ul>
+        <li>If all closed-loop poles lie in the left half of the s-plane, the system is <b>Stable</b>.</li>
+        <li>If any pole moves to the right half of the s-plane, the system is <b>Unstable</b>.</li>
+        <li>If poles lie on the imaginary axis, the system is <b>Marginally Stable</b>.</li>
+    </ul>
+    <p>
+        Root locus helps in selecting the appropriate gain K to achieve desired stability and performance.
+    </p>
+</section>
+
+    <section id="procedure" class="content-section">
+        <h2>Procedure</h2>
+        <ol>
+                <li>Open Scilab software.</li>
+                <li>Define the Laplace variable using <code>poly()</code>.</li>
+                <li>Define the transfer function using <code>syslin()</code>.</li>
+                <li>Use <code>evans()</code> to plot the root locus.</li>
+                <li>Observe pole movement in the s-plane.</li>
+                <li>Determine stability based on pole location.</li>
+            </ol>
+    </section>
+
+    <section id="result" class="content-section">
+        <h2>Result</h2>
+        <p>
+            The root locus plot of the given system was successfully obtained 
+        using Scilab. The variation of pole locations with respect to gain K 
+        was analyzed, and the stability of the system was determined.
+        </p>
+    </section>
+
+</main>
+</div>
+
+<script>
+function showSection(id){
+    document.querySelectorAll('.content-section').forEach(sec=>{
+        sec.classList.remove('active');
+    });
+    document.querySelectorAll('.nav-btn').forEach(btn=>{
+        btn.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>

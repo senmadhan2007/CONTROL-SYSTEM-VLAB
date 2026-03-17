@@ -93,6 +93,14 @@ def experiment5():
 def experiment5_1():
     return render_template("experiment5_1.html")
 
+@app.route("/experiment6")
+def experiment6():
+    return render_template("experiment6.html")
+
+@app.route("/experiment6_1")
+def experiment6_1():
+    return render_template("experiment6_1.html")
+
 def normalize(code):
     return [
         l.replace(" ", "").replace("\t", "")
@@ -405,6 +413,15 @@ def run_exp5_1():
     except subprocess.TimeoutExpired:
         return jsonify({"error": "Execution timed out."})
     return jsonify({"output": output})
+
+@app.route("/run_exp6_1", methods=["POST"])
+def run_exp6_1():
+    return common_runner(request.form.get("code",""), """
+s = poly(0, 's');
+t = 0:0.05:30;
+Sys = syslin('c', 1/(s^3 + 3*s^2 + 6*s + 1));
+evans(Sys);
+""")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)
