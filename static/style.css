@@ -43,9 +43,9 @@ body{
     font-size:11px;
     color:#374151;
 }
-.black-bar{
-    height:1.5px;
-    background:#000000;
+.black-bar {
+    height: 1.5px;
+    background: #000000;
 }
 .layout{
     display:flex;
@@ -322,4 +322,22 @@ textarea{
     margin:8px;
     box-sizing:border-box;
     border-radius:10px;
+}
+.footer {
+    text-align: center;
+    padding: 5px 0;
+    background: #ffffff;
+    color: #000000;
+    font-size: 14px;
+    line-height: 1.2;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 500;
+    border-top: 1.5px solid #000;
+    margin-top: 30px; 
+}
+.footer p {
+    margin: 4px 0;
+}
+.footer p:first-child {
+    font-weight: 600;
 }

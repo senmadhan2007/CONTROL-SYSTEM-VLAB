@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Control System Virtual Laboratory</title>
+    <title>Control Systems Virtual Laboratory</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -34,7 +34,12 @@
             <span class="exp-no">Experiment 6</span>
             <span class="exp-title">Stability Analysis of Linear System using Root Locus</span>
         </div>
+        <div class="experiment-item" onclick="location.href='/experiment7'">
+            <span class="exp-no">Experiment 7</span>
+            <span class="exp-title">Frequency Response Analysis Using Bode Plot</span>
+        </div>
     </div>
 </div>
 </body>
+{% include 'footer.html' %}
 </html>

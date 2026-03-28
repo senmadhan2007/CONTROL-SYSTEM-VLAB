@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Experiment 6</title>
+<title>Experiment 7</title>
 <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
 </head>
 <body>
@@ -10,23 +10,22 @@
 <div class="exp-layout">
     <div class="exp-left">
 
-        <h2>Experiment 6 – Stability Analysis of Linear System using Root Locus</h2>
+        <h2>Experiment 7 – Frequency Response Analysis Using Bode Plot</h2>
 
         <h3>Reference Program</h3>
         
         <pre class="code nocopy">
 s = poly(0, 's');
-t = 0:0.05:30;
-Sys = syslin('c', 1/(s^3 + 3*s^2 + 6*s + 1));
-evans(Sys);
-        </pre>
+Sys = syslin('c', (s^2 + 5*s + 3) / (s^3 + 3*s^2 + 6*s + 1));
+bode(Sys, 0.01, 100)
+</pre>
         <h3>Type the Program</h3>
         <textarea id="code" rows="10"></textarea>
 
         <button class="primary-btn" onclick="run()">Execute</button>
         <p id="msg"></p>
         <div class="back-container">
-            <button class="back-btn" onclick="location.href='/experiment6'">← Back</button>
+            <button class="back-btn" onclick="location.href='/experiment7'">← Back</button>
         </div>
 
     </div>
@@ -44,7 +43,7 @@ function run(){
  let d=new FormData();
  d.append("code",document.getElementById("code").value);
 
- fetch("/run_exp6_1",{method:"POST",body:d})
+ fetch("/run_exp7_1",{method:"POST",body:d})
  .then(r=>r.json()).then(r=>{
   if(r.error){
     msg.className="error-box";

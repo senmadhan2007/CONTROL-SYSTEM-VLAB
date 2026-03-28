@@ -101,6 +101,14 @@ def experiment6():
 def experiment6_1():
     return render_template("experiment6_1.html")
 
+@app.route("/experiment7")
+def experiment7():
+    return render_template("experiment7.html")
+
+@app.route("/experiment7_1")
+def experiment7_1():
+    return render_template("experiment7_1.html")
+
 def normalize(code):
     return [
         l.replace(" ", "").replace("\t", "")
@@ -421,6 +429,14 @@ s = poly(0, 's');
 t = 0:0.05:30;
 Sys = syslin('c', 1/(s^3 + 3*s^2 + 6*s + 1));
 evans(Sys);
+""")
+
+@app.route("/run_exp7_1", methods=["POST"])
+def run_exp7_1():
+    return common_runner(request.form.get("code",""), """
+s = poly(0, 's');
+Sys = syslin('c', (s^2 + 5*s + 3) / (s^3 + 3*s^2 + 6*s + 1));
+bode(Sys, 0.01, 100)
 """)
 
 if __name__ == "__main__":
