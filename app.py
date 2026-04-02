@@ -109,6 +109,14 @@ def experiment7():
 def experiment7_1():
     return render_template("experiment7_1.html")
 
+@app.route("/experiment8")
+def experiment8():
+    return render_template("experiment8.html")
+
+@app.route("/experiment8_1")
+def experiment8_1():
+    return render_template("experiment8_1.html")
+
 def normalize(code):
     return [
         l.replace(" ", "").replace("\t", "")
@@ -437,6 +445,26 @@ def run_exp7_1():
 s = poly(0, 's');
 Sys = syslin('c', (s^2 + 5*s + 3) / (s^3 + 3*s^2 + 6*s + 1));
 bode(Sys, 0.01, 100)
+""")
+
+@app.route("/run_exp8_1", methods=["POST"])
+def run_exp8_1():
+    return common_runner(request.form.get("code",""), """
+T = 10;
+L = 100;
+
+omega = logspace(-1, 2, 1000);
+s = %i * omega;
+
+den = s .* (T * s + 1);
+num = exp(-s * L);
+
+repf = num ./ den;
+
+rad = abs(repf);
+theta = atan(imag(repf), real(repf));
+
+polarplot(theta, rad, style=5);
 """)
 
 if __name__ == "__main__":
