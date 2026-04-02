@@ -464,7 +464,7 @@ repf = num ./ den;
 rad = abs(repf);
 theta = atan(imag(repf), real(repf));
 
-polarplot(theta, rad, style=5);
+polarplot(theta, rad, style=5)
 """)
 
 if __name__ == "__main__":
