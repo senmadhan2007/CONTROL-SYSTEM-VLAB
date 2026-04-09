@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Experiment 9</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<div class="layout">
+    <aside class="sidebar exp-sidebar">
+        <button class="nav-btn active" onclick="showSection(event,'aim')">Aim</button>
+        <button class="nav-btn" onclick="showSection(event,'apparatus')">Apparatus</button>
+        <button class="nav-btn" onclick="showSection(event,'theory')">Theory</button>
+        <button class="nav-btn" onclick="showSection(event,'procedure')">Procedure</button>
+        <button class="nav-btn" onclick="location.href='/experiment9_1'">Simulation</button>
+        <button class="nav-btn" onclick="showSection(event,'result')">Result</button>
+        <button class="nav-btn" onclick="location.href='/'">← Back</button>
+    </aside>
+
+    <main class="content-area">
+
+    <section id="aim" class="content-section active">
+        <h2>Aim</h2>
+        <p>
+            To plot the Nyquist diagram of a given transfer function using Scilab and analyze the stability of the system.
+        </p>
+    </section>
+
+    <section id="apparatus" class="content-section">
+        <h2>Apparatus Required</h2>
+        <ul>
+            <li>Computer / Laptop</li>
+            <li>Scilab Software</li>
+            <li>Internet Browser</li>
+            <li>Virtual Control System Laboratory</li>
+        </ul>
+    </section>
+
+    <section id="theory" class="content-section">
+        <h2>Theory</h2>
+
+        <p>
+            The Nyquist plot is a graphical representation of the frequency response of a system in the complex plane. 
+            It is used to determine the stability of a closed-loop control system using the Nyquist stability criterion.
+        </p>
+
+        <p>
+            The given transfer function is:
+        </p>
+
+        <p><b>G(s) = 1 / (s³ + 3s² + 6s + 1)</b></p>
+
+        <p>
+            By substituting <b>s = jω</b>, the frequency response <b>G(jω)</b> is obtained.
+        </p>
+
+        <p>
+            The Nyquist plot shows how the complex value of the transfer function varies with frequency.
+        </p>
+
+        <ul>
+            <li>Encirclement of the point (-1, 0) determines system stability.</li>
+            <li>No encirclement → Stable system (for open-loop stable systems).</li>
+            <li>Encirclement → Possible instability.</li>
+        </ul>
+
+        <p>
+            Nyquist plots are widely used in control system analysis for stability and performance evaluation.
+        </p>
+    </section>
+
+    <section id="procedure" class="content-section">
+        <h2>Procedure</h2>
+        <ol>
+            <li>Open Scilab software.</li>
+            <li>Define the Laplace variable using <code>s = poly(0, 's')</code>.</li>
+            <li>Define the transfer function:
+                <br><code>Sys = syslin('c', 1/(s^3 + 3*s^2 + 6*s + 1))</code>
+            </li>
+            <li>Define the time range (optional): <code>t = 0:0.05:30</code>.</li>
+            <li>Use the Nyquist command:
+                <br><code>nyquist(Sys)</code>
+            </li>
+            <li>Observe the Nyquist plot generated.</li>
+            <li>Analyze encirclements of (-1,0) point to determine stability.</li>
+        </ol>
+    </section>
+
+    <section id="result" class="content-section">
+        <h2>Result</h2>
+        <p>
+            The Nyquist plot of the given transfer function was successfully obtained using Scilab. 
+            The plot was analyzed to determine the stability of the system based on the Nyquist stability criterion. 
+            The system behavior was observed in the frequency domain.
+        </p>
+    </section>
+
+</main>
+</div>
+
+<script>
+function showSection(event, id){
+    document.querySelectorAll('.content-section').forEach(sec=>{
+        sec.classList.remove('active');
+    });
+
+    document.querySelectorAll('.nav-btn').forEach(btn=>{
+        btn.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
+
+</body>
+
+{% include 'footer.html' %}
+
+</html>

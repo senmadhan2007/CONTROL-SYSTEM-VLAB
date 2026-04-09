@@ -117,6 +117,14 @@ def experiment8():
 def experiment8_1():
     return render_template("experiment8_1.html")
 
+@app.route("/experiment9")
+def experiment9():
+    return render_template("experiment9.html")
+
+@app.route("/experiment9_1")
+def experiment9_1():
+    return render_template("experiment9_1.html")
+
 def normalize(code):
     return [
         l.replace(" ", "").replace("\t", "")
@@ -467,5 +475,13 @@ theta = atan(imag(repf), real(repf));
 polarplot(theta, rad, style=5)
 """)
 
+@app.route("/run_exp9_1", methods=["POST"])
+def run_exp9_1():
+    return common_runner(request.form.get("code",""), """
+s = poly(0, 's');
+t = 0:0.05:30;
+Sys = syslin('c', 1/(s^3 + 3*s^2 + 6*s + 1));
+nyquist(Sys)
+""")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)
