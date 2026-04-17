@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Experiment 10</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+<body>
+
+{% include 'header.html' %}
+<div class="exp-layout">
+    <div class="exp-left">
+
+        <h2> Experiment 10 – Design of PID Controller for First Order and Second Order Systems</h2>
+
+        <h3>Reference Program</h3>
+        
+        <pre class="code nocopy">
+s = %s;
+
+Sys = syslin('c', 100/(s^3 + 13*s^2 + 32*s + 20));
+disp(Sys);
+
+t = 0:0.01:10;
+
+Sys_o = csim('step', t, Sys);
+
+subplot(2,1,1);
+plot(t, Sys_o);
+xtitle("Open Loop Response of System", "Time (sec)", "Response");
+
+Kp = 1.8;
+Ki = 2;
+Kd = 0.344;
+
+Con = Kp + Ki/s + Kd*s;
+disp(Con);
+
+Sys_f = syslin('c', (Con*Sys) / (1 + Con*Sys));
+disp(Sys_f);
+
+Sys_c = csim('step', t, Sys_f);
+
+subplot(2,1,2);
+plot(t, Sys_c);
+xtitle("Response with PID Controller", "Time (sec)", "Response");
+</pre>
+        <h3>Type the Program</h3>
+        <textarea id="code" rows="10"></textarea>
+
+        <button class="primary-btn" onclick="run()">Execute</button>
+        <p id="msg"></p>
+        <div class="back-container">
+            <button class="back-btn" onclick="location.href='/experiment10'">← Back</button>
+        </div>
+
+    </div>
+    <div class="exp-right">
+        <h3>Output</h3>
+        <img id="output">
+    </div>
+
+</div>
+
+<script>
+function run(){
+ let msg=document.getElementById("msg");
+ let out=document.getElementById("output");
+ let d=new FormData();
+ d.append("code",document.getElementById("code").value);
+
+ fetch("/run_exp10_1",{method:"POST",body:d})
+ .then(r=>r.json()).then(r=>{
+  if(r.error){
+    msg.className="error-box";
+    msg.innerHTML=r.error;
+    out.src="";
+  } else {
+    msg.className="success-box";
+    msg.innerHTML="Execution Successful";
+    out.src="/static/output.png?"+Date.now();
+  }
+ });
+}
+</script>
+
+</body>
+{% include 'footer.html' %}
+</html>

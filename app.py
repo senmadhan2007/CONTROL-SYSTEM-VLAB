@@ -125,6 +125,14 @@ def experiment9():
 def experiment9_1():
     return render_template("experiment9_1.html")
 
+@app.route("/experiment10")
+def experiment10():
+    return render_template("experiment10.html")
+
+@app.route("/experiment10_1")
+def experiment10_1():
+    return render_template("experiment10_1.html")
+
 def normalize(code):
     return [
         l.replace(" ", "").replace("\t", "")
@@ -482,6 +490,39 @@ s = poly(0, 's');
 t = 0:0.05:30;
 Sys = syslin('c', 1/(s^3 + 3*s^2 + 6*s + 1));
 nyquist(Sys)
+""")
+
+@app.route("/run_exp10_1", methods=["POST"])
+def run_exp10_1():
+    return common_runner(request.form.get("code",""), """
+s = %s;
+
+Sys = syslin('c', 100/(s^3 + 13*s^2 + 32*s + 20));
+disp(Sys);
+
+t = 0:0.01:10;
+
+Sys_o = csim('step', t, Sys);
+
+subplot(2,1,1);
+plot(t, Sys_o);
+xtitle("Open Loop Response of System", "Time (sec)", "Response");
+
+Kp = 1.8;
+Ki = 2;
+Kd = 0.344;
+
+Con = Kp + Ki/s + Kd*s;
+disp(Con);
+
+Sys_f = syslin('c', (Con*Sys) / (1 + Con*Sys));
+disp(Sys_f);
+
+Sys_c = csim('step', t, Sys_f);
+
+subplot(2,1,2);
+plot(t, Sys_c);
+xtitle("Response with PID Controller", "Time (sec)", "Response");
 """)
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)
