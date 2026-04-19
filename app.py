@@ -133,6 +133,14 @@ def experiment10():
 def experiment10_1():
     return render_template("experiment10_1.html")
 
+@app.route("/experiment11")
+def experiment11():
+    return render_template("experiment11.html")
+
+@app.route("/experiment11_1")
+def experiment11_1():
+    return render_template("experiment11_1.html")
+
 def normalize(code):
     return [
         l.replace(" ", "").replace("\t", "")
@@ -523,6 +531,67 @@ Sys_c = csim('step', t, Sys_f);
 subplot(2,1,2);
 plot(t, Sys_c);
 xtitle("Response with PID Controller", "Time (sec)", "Response");
+""")
+
+@app.route("/run_exp11_1", methods=["POST"])
+def run_exp11_1():
+    return common_runner(request.form.get("code",""), """
+K  = 15;
+Pd = 45;
+ep = 5;
+wm = 5.6;
+
+s = %s;
+
+G = syslin('c', K/(s^3 + s^2));
+
+[Gm, Gfr] = g_margin(G);
+[Pm, Pfr] = p_margin(G);
+
+subplot(2,2,1);
+bode(G);
+xtitle("Bode Plot of Uncompensated System");
+
+ph = Pd - Pm + ep;
+
+if ph > 60 then
+    phm = ph / 2;
+else
+    phm = ph;
+end
+
+alpha = (1 - sind(phm)) / (1 + sind(phm));
+
+T = 1 / (wm * sqrt(alpha));
+
+Gc = syslin('c', (s + (1/T)) / (s + (1/(alpha*T))));
+
+if ph == phm then
+    Go = (Gc * G) / alpha;
+else
+    Go = Gc * Gc * G;
+end
+
+subplot(2,2,3);
+bode(Go);
+xtitle("Bode Plot of Compensated System");
+
+comp   = syslin('c', Go/(1 + Go));
+uncomp = syslin('c', G/(1 + G));
+
+t = 0:0.1:10;
+y1 = csim('step', t, uncomp);
+
+subplot(2,2,2);
+plot(t, y1);
+xtitle("Uncompensated System Response", "Time (sec)", "Amplitude");
+
+t1 = 0:1:1000;
+y2 = csim('step', t1, comp);
+
+subplot(2,2,4);
+plot(t1, y2);
+xtitle("Compensated System Response", "Time (sec)", "Amplitude")
 """)
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)

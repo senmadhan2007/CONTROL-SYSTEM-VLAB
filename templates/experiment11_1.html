@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Experiment 10</title>
+<title>Experiment 11</title>
 <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
 </head>
 <body>
@@ -10,39 +10,67 @@
 <div class="exp-layout">
     <div class="exp-left">
 
-        <h2> Experiment 10 – Design of PID Controller for First Order and Second Order Systems</h2>
+        <h2> Experiment 11 – Design of Compensators</h2>
 
         <h3>Reference Program</h3>
         
         <pre class="code nocopy">
+K  = 15;
+Pd = 45;
+ep = 5;
+wm = 5.6;
+
 s = %s;
 
-Sys = syslin('c', 100/(s^3 + 13*s^2 + 32*s + 20));
-disp(Sys);
+G = syslin('c', K/(s^3 + s^2));
 
-t = 0:0.01:10;
+[Gm, Gfr] = g_margin(G);
+[Pm, Pfr] = p_margin(G);
 
-Sys_o = csim('step', t, Sys);
+subplot(2,2,1);
+bode(G);
+xtitle("Bode Plot of Uncompensated System");
 
-subplot(2,1,1);
-plot(t, Sys_o);
-xtitle("Open Loop Response of System", "Time (sec)", "Response");
+ph = Pd - Pm + ep;
 
-Kp = 1.8;
-Ki = 2;
-Kd = 0.344;
+if ph > 60 then
+    phm = ph / 2;
+else
+    phm = ph;
+end
 
-Con = Kp + Ki/s + Kd*s;
-disp(Con);
+alpha = (1 - sind(phm)) / (1 + sind(phm));
 
-Sys_f = syslin('c', (Con*Sys) / (1 + Con*Sys));
-disp(Sys_f);
+T = 1 / (wm * sqrt(alpha));
 
-Sys_c = csim('step', t, Sys_f);
+Gc = syslin('c', (s + (1/T)) / (s + (1/(alpha*T))));
 
-subplot(2,1,2);
-plot(t, Sys_c);
-xtitle("Response with PID Controller", "Time (sec)", "Response")
+if ph == phm then
+    Go = (Gc * G) / alpha;
+else
+    Go = Gc * Gc * G;
+end
+
+subplot(2,2,3);
+bode(Go);
+xtitle("Bode Plot of Compensated System");
+
+comp   = syslin('c', Go/(1 + Go));
+uncomp = syslin('c', G/(1 + G));
+
+t = 0:0.1:10;
+y1 = csim('step', t, uncomp);
+
+subplot(2,2,2);
+plot(t, y1);
+xtitle("Uncompensated System Response", "Time (sec)", "Amplitude");
+
+t1 = 0:1:1000;
+y2 = csim('step', t1, comp);
+
+subplot(2,2,4);
+plot(t1, y2);
+xtitle("Compensated System Response", "Time (sec)", "Amplitude")
 </pre>
         <h3>Type the Program</h3>
         <textarea id="code" rows="10"></textarea>
@@ -50,7 +78,7 @@ xtitle("Response with PID Controller", "Time (sec)", "Response")
         <button class="primary-btn" onclick="run()">Execute</button>
         <p id="msg"></p>
         <div class="back-container">
-            <button class="back-btn" onclick="location.href='/experiment10'">← Back</button>
+            <button class="back-btn" onclick="location.href='/experiment11'">← Back</button>
         </div>
 
     </div>
@@ -68,7 +96,7 @@ function run(){
  let d=new FormData();
  d.append("code",document.getElementById("code").value);
 
- fetch("/run_exp10_1",{method:"POST",body:d})
+ fetch("/run_exp11_1",{method:"POST",body:d})
  .then(r=>r.json()).then(r=>{
   if(r.error){
     msg.className="error-box";
