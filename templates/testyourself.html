@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Control Systems Virtual Laboratory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+{% include 'header.html' %}
+<div class="page-top-actions">
+    <button onclick="location.href='/'">Home</button>
+    <button onclick="location.href='/mainindex'">Experiments</button>
+    <button onclick="location.href='/testyourself'">Test Yourself</button>
+    <button onclick="location.href='/aboutus'">About Us</button>
+</div>
+
+<div class="quiz-container">
+
+    <div class="quiz-header">
+
+        <h1>Control Systems Self Assessment</h1>
+
+        <p>
+            Answer all questions and evaluate your understanding
+            of Transfer Functions, Time Response Analysis,
+            Stability Analysis, Frequency Response Analysis
+            and Controller Design.
+        </p>
+
+    </div>
+
+    <div id="quizArea"></div>
+
+    <div class="submit-section">
+
+        <button
+            class="submit-btn"
+            onclick="checkAnswers()">
+
+            Submit Test
+
+        </button>
+
+    </div>
+
+    <div id="resultBox"></div>
+
+</div>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='questions.js') }}"></script>
+
+</body>
+</html>

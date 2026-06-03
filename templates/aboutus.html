@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Us - Department of Electronics & Instrumentation Engineering</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+{% include 'header.html' %}
+
+<div class="page-top-actions">
+    <button onclick="location.href='/'">Home</button>
+    <button onclick="location.href='/mainindex'">Experiments</button>
+    <button onclick="location.href='/testyourself'">Test Yourself</button>
+    <button onclick="location.href='/aboutus'">About Us</button>
+</div>
+
+<div class="about-page">
+
+    <section class="glass-card">
+
+        <h2>About the Department</h2>
+
+        <p>
+            The Department of Electronics and Instrumentation Engineering
+            was established in the academic year 2007–08 with the vision
+            of developing highly skilled engineers capable of addressing
+            the challenges of modern automation, instrumentation,
+            process control, robotics, and intelligent manufacturing
+            systems.
+        </p>
+
+        <p>
+            The department has grown into a centre of excellence in
+            engineering education by combining strong academic
+            foundations with practical learning experiences. Students
+            are encouraged to participate in innovation, research,
+            industrial projects, and interdisciplinary activities that
+            enhance their professional and technical competencies.
+        </p>
+
+        <p>
+            The department is accredited by the IET Accreditation Board
+            (UK) and recognized by the IASC Sector Skill Council,
+            affiliated with the Ministry of Skill Development and
+            Entrepreneurship, Government of India.
+        </p>
+
+    </section>
+
+    <section class="stats-grid">
+
+        <div class="glass-stat">
+            <h3>2007</h3>
+            <p>Established</p>
+        </div>
+
+        <div class="glass-stat">
+            <h3>30+</h3>
+            <p>Faculty & Staff</p>
+        </div>
+
+        <div class="glass-stat">
+            <h3>333+</h3>
+            <p>Students</p>
+        </div>
+
+        <div class="glass-stat">
+            <h3>540+</h3>
+            <p>Publications</p>
+        </div>
+
+        <div class="glass-stat">
+            <h3>74+</h3>
+            <p>Patents Granted</p>
+        </div>
+
+        <div class="glass-stat">
+            <h3>28+</h3>
+            <p>Ph.D Awarded</p>
+        </div>
+
+    </section>
+
+    <section class="vision-mission">
+
+        <div class="vision-card">
+
+            <h2>Vision</h2>
+
+            <p>
+                The department is committed to enabling students to
+                experience an uncompromised educational journey that
+                facilitates successful careers and excellence in the
+                field of Electronics and Instrumentation Engineering
+                while maintaining strong social and ethical values.
+            </p>
+
+        </div>
+
+        <div class="mission-card">
+
+            <h2>Mission</h2>
+
+            <ul>
+                <li>To create a scholarly and professional environment.</li>
+
+                <li>To provide world-class teaching resources and laboratory facilities.</li>
+
+                <li>To develop innovative, dynamic, and flexible academic programs.</li>
+
+                <li>To foster research and development for the benefit of society.</li>
+
+            </ul>
+
+        </div>
+
+    </section>
+
+    <section class="glass-card">
+
+        <h2>Contact Information</h2>
+
+        <p>
+            Department of Electronics & Instrumentation Engineering<br>
+            5th Floor, Hi-Tech Block<br>
+            SRM Institute of Science and Technology<br>
+            Kattankulathur – 603203
+        </p>
+
+        <p>
+            Phone: 044-27412201 / 044-27417870<br>
+            Email: hod.eie.ktr.et@srmist.edu.in
+        </p>
+
+    </section>
+
+</div>
+
+{% include 'footer.html' %}
+
+</body>
+</html>

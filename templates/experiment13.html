@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Experiment 1.2 - Signal Flow Graph Analysis</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<div class="layout">
+
+    <aside class="sidebar exp-sidebar">
+        <button class="nav-btn active" onclick="showSection('aim')">Aim</button>
+        <button class="nav-btn" onclick="showSection('apparatus')">Apparatus</button>
+        <button class="nav-btn" onclick="showSection('theory')">Theory</button>
+        <button class="nav-btn" onclick="showSection('procedure')">Procedure</button>
+        <button class="nav-btn" onclick="location.href='/experiment13_1'">Simulation</button>
+        <button class="nav-btn" onclick="showSection('result')">Result</button>
+        <button class="nav-btn" onclick="location.href='/'">← Back</button>
+    </aside>
+
+    <main class="content-area">
+
+        <section id="aim" class="content-section active">
+            <h2>Aim</h2>
+            <p>
+                To determine the overall transfer function of a control system
+                using Signal Flow Graph (SFG) analysis and Mason's Gain Formula.
+            </p>
+        </section>
+
+        <section id="apparatus" class="content-section">
+            <h2>Apparatus Required</h2>
+            <ul>
+                <li>Computer / Laptop</li>
+                <li>Scilab Software</li>
+                <li>Internet Browser</li>
+                <li>Virtual Control System Laboratory</li>
+                <li>Control System Toolbox</li>
+            </ul>
+        </section>
+
+        <section id="theory" class="content-section">
+            <h2>Theory</h2>
+
+            <p>
+                A Signal Flow Graph (SFG) is a graphical representation of the
+                functional relationships among system variables. It consists of
+                nodes connected by directed branches, where each branch is
+                associated with a gain that represents the relationship between
+                two variables.
+            </p>
+
+            <p>
+                Signal Flow Graphs provide a convenient method for analyzing
+                complex control systems. The overall transfer function can be
+                determined directly from the graph using Mason's Gain Formula,
+                eliminating the need for extensive block diagram reduction.
+            </p>
+
+            <p style="text-align:center;">
+                T = Σ(P<sub>k</sub>Δ<sub>k</sub>) / Δ
+            </p>
+
+            <p>
+                where:
+            </p>
+
+            <ul>
+                <li><b>P<sub>k</sub></b> = Gain of the kth forward path</li>
+                <li><b>Δ</b> = Determinant of the graph</li>
+                <li><b>Δ<sub>k</sub></b> = Determinant obtained by removing loops touching the kth forward path</li>
+            </ul>
+
+            <p>
+                The determinant Δ is calculated using:
+            </p>
+
+            <p style="text-align:center;">
+                Δ = 1 − (Sum of Loop Gains) + (Sum of Products of Two Non-Touching Loops)
+                − (Sum of Products of Three Non-Touching Loops) + ...
+            </p>
+
+            <p>
+                Mason's Gain Formula provides a systematic and efficient approach
+                for obtaining the transfer function of a system represented by
+                a signal flow graph.
+            </p>
+        </section>
+
+        <section id="procedure" class="content-section">
+            <h2>Procedure</h2>
+
+            <ol>
+                <li>Draw the signal flow graph for the given control system.</li>
+                <li>Identify all forward paths from input node to output node.</li>
+                <li>Calculate the gain of each forward path.</li>
+                <li>Identify all individual loops and determine their loop gains.</li>
+                <li>Determine all possible non-touching loop combinations.</li>
+                <li>Calculate the graph determinant (Δ).</li>
+                <li>Calculate Δ<sub>k</sub> for each forward path.</li>
+                <li>Apply Mason's Gain Formula.</li>
+                <li>Determine the overall transfer function.</li>
+                <li>Verify the result using Scilab simulation.</li>
+            </ol>
+        </section>
+
+        <section id="result" class="content-section">
+            <h2>Result</h2>
+
+            <p>
+                The overall transfer function of the given signal flow graph
+                was successfully determined using Mason's Gain Formula.
+                The analytical result was verified using Scilab simulation.
+            </p>
+        </section>
+
+    </main>
+
+</div>
+
+<script>
+
+function showSection(id){
+
+    document.querySelectorAll('.content-section').forEach(sec=>{
+        sec.classList.remove('active');
+    });
+
+    document.querySelectorAll('.nav-btn').forEach(btn=>{
+        btn.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+}
+
+</script>
+
+</body>
+
+{% include 'footer.html' %}
+
+</html>
+```

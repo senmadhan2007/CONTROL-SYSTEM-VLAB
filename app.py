@@ -10,8 +10,40 @@ import os
 app = Flask(__name__)
 
 @app.route("/")
+def home():
+    return render_template("home.html")
+
+@app.route("/mainindex")
+def mainindex():
+    return render_template("mainindex.html")
+
+@app.route("/testyourself")
+def testyourself():
+    return render_template("testyourself.html")
+
+@app.route("/aboutus")
+def aboutus():
+    return render_template("aboutus.html")
+
+@app.route("/index")
 def index():
     return render_template("index.html")
+
+@app.route("/index2")
+def index2():
+    return render_template("index2.html")
+
+@app.route("/index3")
+def index3():
+    return render_template("index3.html")
+
+@app.route("/index4")
+def index4():
+    return render_template("index4.html")
+
+@app.route("/index5")
+def index5():
+    return render_template("index5.html")
 
 @app.route("/experiment1")
 def experiment1():
@@ -140,6 +172,22 @@ def experiment11():
 @app.route("/experiment11_1")
 def experiment11_1():
     return render_template("experiment11_1.html")
+
+@app.route("/experiment12")
+def experiment12():
+    return render_template("experiment12.html")
+
+@app.route("/experiment12_1")
+def experiment12_1():
+    return render_template("experiment12_1.html")
+
+@app.route("/experiment13")
+def experiment13():
+    return render_template("experiment13.html")
+
+@app.route("/experiment13_1")
+def experiment13_1():
+    return render_template("experiment13_1.html")
 
 def normalize(code):
     return [
@@ -593,5 +641,34 @@ subplot(2,2,4);
 plot(t1, y2);
 xtitle("Compensated System Response", "Time (sec)", "Amplitude")
 """)
+
+@app.route("/run_exp12_1", methods=["POST"])
+def run_exp12_1():
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+    code = request.form.get("code","")
+    if not code.strip():
+        return jsonify({"error": "Program cannot be empty."})
+    try:
+        output = run_scilab_console(code)
+    except subprocess.TimeoutExpired:
+        return jsonify({"error": "Execution timed out."})
+    return jsonify({"output": output})
+
+@app.route("/run_exp13_1", methods=["POST"])
+def run_exp13_1():
+    allowed, wait = check_cooldown()
+    if not allowed:
+        return jsonify({"error": f"System busy. Please wait {wait} seconds."})
+    code = request.form.get("code","")
+    if not code.strip():
+        return jsonify({"error": "Program cannot be empty."})
+    try:
+        output = run_scilab_console(code)
+    except subprocess.TimeoutExpired:
+        return jsonify({"error": "Execution timed out."})
+    return jsonify({"output": output})
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)

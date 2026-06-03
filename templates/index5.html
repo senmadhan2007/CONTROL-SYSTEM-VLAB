@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Control Systems Virtual Laboratory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+{% include 'header.html' %}
+<div class="index-container">
+    <h1 class="index-heading">List of Experiments</h1>
+    <div class="experiment-list">
+        <div class="experiment-item" onclick="location.href='/experiment10'">
+            <span class="exp-no">Experiment 5.1</span>
+            <span class="exp-title">Design of PID Controller for First Order and Second Order Systems</span>
+        </div>
+        <div class="experiment-item" onclick="location.href='/experiment11'">
+            <span class="exp-no">Experiment 5.2</span>
+            <span class="exp-title">Design of Compensators</span>
+        </div>
+    </div>
+</div>
+</body>
+{% include 'footer.html' %}
+</html>

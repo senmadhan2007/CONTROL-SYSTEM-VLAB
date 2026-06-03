@@ -1,80 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Experiment 3.2</title>
+<title>Experiment 1.1</title>
 <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
 </head>
 <body>
 
 {% include 'header.html' %}
+
 <div class="exp-layout">
 
 <div class="exp-left">
 
-<h2>Experiment 3.2 – Stability Analysis of Linear System using Routh Hurwitz Criterion</h2>
+<h2>Experiment 1.1 – Block Diagram Reduction Technique</h2>
 
 <h3>Reference Program</h3>
 
 <pre id="refcode" class="code nocopy">
-coeff=[1 5 6 0];
-l=length(coeff);
-disp("Roots of Characteristic Equation are:");
-disp(roots(coeff));
-if modulo(l,2)==0 then
-    m=zeros(l,l/2);
-else
-    m=zeros(l,(l+1)/2);
-end
-[rows,cols]=size(m);
-for i=1:cols
-    if (2*i-1)<=l then
-        m(1,i)=coeff(2*i-1);
-    end
-end
-for i=1:cols
-    if (2*i)<=l then
-        m(2,i)=coeff(2*i);
-    end
-end
-for j=3:rows
-    if m(j-1,1)==0 then
-        m(j-1,1)=0.001;
-    end
-    for i=1:cols-1
-        m(j,i)=((m(j-1,1)*m(j-2,i+1))-(m(j-2,1)*m(j-1,i+1)))/m(j-1,1);
-    end
-end
-disp("Routh-Hurwitz Array:");
-disp(m);
-Temp=sign(m(:,1));
-changes=0;
-for i=1:length(Temp)-1
-    if Temp(i)*Temp(i+1)<0 then
-        changes=changes+1;
-    end
-end
-if changes==0 then
-    disp("System is Stable");
-else
-    disp("System is Unstable");
-end
+s = poly(0,'s');
+
+G1 = syslin('c',5/(s+2));
+G2 = syslin('c',2/(s+3));
+
+G = G1*G2;
+
+disp("Series Transfer Function:");
+disp(G);
+
+T = G/.1;
+
+disp("Closed Loop Transfer Function:");
+disp(T)
 </pre>
+
 <br>
 
 <h3>Type the Program</h3>
 <textarea id="code" rows="10"></textarea>
+
 <br><br>
+
 <button class="primary-btn" onclick="run()">Execute</button>
+
 <p id="msg"></p>
+
 <div class="back-container">
-<button class="back-btn" onclick="location.href='/experiment5'">← Back</button>
+<button class="back-btn" onclick="location.href='/experiment12'">← Back</button>
 </div>
+
 </div>
+
 <div class="exp-right">
 <h3>Output</h3>
 <pre id="output" class="console-box"></pre>
 </div>
+
 </div>
+
 <script>
 
 function copyCode(){
@@ -90,7 +72,7 @@ let out=document.getElementById("output");
 let d=new FormData();
 d.append("code",document.getElementById("code").value);
 
-fetch("/run_exp5_1",{method:"POST",body:d})
+fetch("/run_exp12_1",{method:"POST",body:d})
 .then(r=>r.json())
 .then(r=>{
  if(r.error){
@@ -110,5 +92,8 @@ fetch("/run_exp5_1",{method:"POST",body:d})
 </script>
 
 </body>
+
 {% include 'footer.html' %}
+
 </html>
+```

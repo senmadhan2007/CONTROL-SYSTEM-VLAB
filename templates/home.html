@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Control Systems Virtual Laboratory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<div class="page-top-actions">
+    <button onclick="location.href='/'">Home</button>
+    <button onclick="location.href='/mainindex'">Experiments</button>
+    <button onclick="location.href='/testyourself'">Test Yourself</button>
+    <button onclick="location.href='/aboutus'">About Us</button>
+</div>
+
+<div class="home-container">
+
+    <section class="hero-section">
+        <h1>Control Systems Virtual Laboratory</h1>
+
+        <p>
+            Welcome to the Control Systems Virtual Laboratory developed
+            by the Department of Electronics and Instrumentation Engineering,
+            SRM Institute of Science and Technology. This platform enables
+            students to perform virtual experiments, visualize system
+            responses, analyze control system performance, and strengthen
+            their understanding of core control engineering concepts.
+        </p>
+    </section>
+
+    <section class="about-section">
+
+        <h2>Laboratory Objective</h2>
+
+        <p>
+            The primary objective of this virtual laboratory is to provide
+            an interactive learning environment where students can explore
+            fundamental and advanced concepts of Control Systems without
+            requiring physical laboratory equipment. The laboratory bridges
+            theoretical knowledge and practical understanding through
+            simulation-based experiments.
+        </p>
+
+    </section>
+
+    <section class="feature-section">
+
+        <div class="feature-card">
+            <h3>Transfer Function Analysis</h3>
+            <p>
+                Study mathematical models of dynamic systems and their
+                representations using transfer functions.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Time Response Analysis</h3>
+            <p>
+                Investigate transient and steady-state responses of
+                first-order and higher-order systems.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Stability Analysis</h3>
+            <p>
+                Evaluate system stability using characteristic equations
+                and standard stability criteria.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Frequency Response</h3>
+            <p>
+                Analyze Bode plots, Nyquist plots and frequency-domain
+                characteristics of control systems.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Controller Design</h3>
+            <p>
+                Design and evaluate P, PI, PD and PID controllers for
+                improved system performance.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Self Assessment</h3>
+            <p>
+                Reinforce learning through quizzes, exercises and
+                concept-based evaluation.
+            </p>
+        </div>
+
+    </section>
+
+    <section class="stats-section">
+
+        <div class="stat-box">
+            <h3>5</h3>
+            <p>Learning Modules</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>13</h3>
+            <p>Virtual Experiments</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>24/7</h3>
+            <p>V-Lab Accessibility</p>
+        </div>
+
+    </section>
+
+</div>

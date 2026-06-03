@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Control Systems Virtual Laboratory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<div class="page-top-actions">
+    <button onclick="location.href='/'">Home</button>
+    <button onclick="location.href='/mainindex'">Experiments</button>
+    <button onclick="location.href='/testyourself'">Test Yourself</button>
+    <button onclick="location.href='/aboutus'">About Us</button>
+</div>
+
+<div class="module-main-wrapper">
+    <h1 class="module-page-title">List of Modules</h1>
+
+    <div class="module-card-container">
+
+        <div class="module-card-item" onclick="location.href='/index'">
+            <span class="module-card-number">Module 1</span>
+            <span class="module-card-name">Transfer Function</span>
+        </div>
+
+        <div class="module-card-item" onclick="location.href='/index2'">
+            <span class="module-card-number">Module 2</span>
+            <span class="module-card-name">Time Domain Analysis</span>
+        </div>
+
+        <div class="module-card-item" onclick="location.href='/index3'">
+            <span class="module-card-number">Module 3</span>
+            <span class="module-card-name">Stability Analysis</span>
+        </div>
+
+        <div class="module-card-item" onclick="location.href='/index4'">
+            <span class="module-card-number">Module 4</span>
+            <span class="module-card-name">Frequency Domain Analysis</span>
+        </div>
+
+        <div class="module-card-item" onclick="location.href='/index5'">
+            <span class="module-card-number">Module 5</span>
+            <span class="module-card-name">Design of Controllers</span>
+        </div>
+
+    </div>
+</div>
+
+{% include 'footer.html' %}
+
+</body>
+</html>

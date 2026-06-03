@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Control Systems Virtual Laboratory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+{% include 'header.html' %}
+<div class="index-container">
+    <h1 class="index-heading">List of Experiments</h1>
+    <div class="experiment-list">
+        <div class="experiment-item" onclick="location.href='/experiment1'">
+            <span class="exp-no">Experiment 2.1</span>
+            <span class="exp-title">
+                Step, Impulse, Sinusoidal and Ramp Response of 1st and 2nd Order Systems</span>
+        </div>
+        <div class="experiment-item" onclick="location.href='/experiment2'">
+            <span class="exp-no">Experiment 2.2</span>
+            <span class="exp-title">Identification of Damping in Second Order System</span>
+        </div>
+        <div class="experiment-item" onclick="location.href='/experiment3'">
+            <span class="exp-no">Experiment 2.3</span>
+            <span class="exp-title">Time Domain Specification of Second Order Systems</span>
+        </div>
+    </div>
+</div>
+</body>
+{% include 'footer.html' %}
+</html>

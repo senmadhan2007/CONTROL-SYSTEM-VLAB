@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Control Systems Virtual Laboratory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+{% include 'header.html' %}
+<div class="index-container">
+    <h1 class="index-heading">List of Experiments</h1>
+    <div class="experiment-list">
+        <div class="experiment-item" onclick="location.href='/experiment7'">
+            <span class="exp-no">Experiment 4.1</span>
+            <span class="exp-title">Frequency Response Analysis Using Bode Plot</span>
+        </div>
+        <div class="experiment-item" onclick="location.href='/experiment8'">
+            <span class="exp-no">Experiment 4.2</span>
+            <span class="exp-title">Frequency Response Analysis Using Polar Plot</span>
+        </div>
+        <div class="experiment-item" onclick="location.href='/experiment9'">
+            <span class="exp-no">Experiment 4.3</span>
+            <span class="exp-title">Frequency Response Analysis Using Nyquist plot</span>
+        </div>
+    </div>
+</div>
+</body>
+{% include 'footer.html' %}
+</html>
