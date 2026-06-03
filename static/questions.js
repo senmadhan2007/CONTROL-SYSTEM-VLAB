@@ -301,42 +301,51 @@ answer:2
 
 ];
 
-const quizArea = document.getElementById("quizArea");
+const leftArea =
+document.getElementById("quizAreaLeft");
 
-if (quizArea) {
+const rightArea =
+document.getElementById("quizAreaRight");
 
-    questions.forEach((q, index) => {
+questions.forEach((q,index)=>{
 
-        let html = `
+let html = `
 
-        <div class="question-card">
+<div class="question-card">
 
-            <h3>${index + 1}. ${q.question}</h3>
+    <h3>${index + 1}. ${q.question}</h3>
 
-            ${q.options.map((opt, optIndex) =>
+    ${q.options.map((opt,optIndex)=>
 
-            `<label class="option">
+    `<label class="option">
 
-                <input
-                    type="radio"
-                    name="q${index}"
-                    value="${optIndex}">
+        <input
+            type="radio"
+            name="q${index}"
+            value="${optIndex}">
 
-                ${opt}
+        ${opt}
 
-            </label>`
+    </label>`
 
-            ).join("")}
+    ).join("")}
 
-        </div>
+</div>
 
-        `;
+`;
 
-        quizArea.innerHTML += html;
+if(index < 25){
 
-    });
+    leftArea.innerHTML += html;
 
 }
+else{
+
+    rightArea.innerHTML += html;
+
+}
+
+});
 
 function checkAnswers() {
 
